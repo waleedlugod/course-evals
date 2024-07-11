@@ -1,12 +1,14 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from getpass import getpass
+
 username = input("Enter username: ")
-password = input("Enter password: ")
-driver = webdriver.Firefox()
+password = getpass("Enter password: ")
+browser = input("Select browser (0: Chrome, 1: Firefox, DEFAULT: Chrome): ")
+driver = webdriver.Chrome() if browser == 0 else webdriver.Firefox() if browser == 1  else webdriver.Chrome()
 driver.get("https://aisis.ateneo.edu/j_aisis/displayLogin.do")
 
 # signs in
