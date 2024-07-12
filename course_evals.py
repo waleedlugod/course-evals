@@ -25,6 +25,10 @@ driver.find_element(By.LINK_TEXT, "COURSE AND FACULTY EVALUATION").click()
 
 # evals
 while(True):
+    isEval = True if input("Fill up eval? (y/n): ").lower() == "y" else False
+    if not isEval: break
+
+    # fill up eval form
     try:
         radios = WebDriverWait(driver, 99999).until(EC.presence_of_all_elements_located((By.TAG_NAME, "input")))
         for radio in radios:
@@ -34,10 +38,5 @@ while(True):
         for textarea in textareas:
             textarea.send_keys("N/A")
     except:
-        driver.quit()
-
-    try:
-        WebDriverWait(driver,
-                      99999).until(EC.presence_of_element_located((By.XPATH, "//td[text()='Not Submitted']")))
-    except:
+        print("Could not find form.")
         driver.quit()
